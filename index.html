@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nsvishalkumar / lead-sdet-portfolio - GitHub</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', '"Noto Sans"', 'Helvetica', 'Arial', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', '"SF Mono"', 'Menlo', 'Consolas', 'monospace'],
+          },
+          colors: {
+            gh: {
+              dark: {
+                canvas: '#0d1117',
+                subtle: '#161b22',
+                muted: '#21262d',
+                border: '#30363d',
+                borderSubtle: '#21262d',
+                text: '#e6edf3',
+                textMuted: '#848d97',
+                accent: '#2f81f7',
+                accentHover: '#58a6ff',
+                success: '#238636',
+                successHover: '#2ea043',
+                badgeBg: '#1f242c',
+                header: '#010409',
+                buttonBg: '#21262d',
+                buttonHover: '#30363d',
+                pr: '#8957e5',
+                issue: '#238636'
+              },
+              light: {
+                canvas: '#ffffff',
+                subtle: '#f6f8fa',
+                muted: '#eaeef2',
+                border: '#d0d7de',
+                borderSubtle: '#afb8c133',
+                text: '#1f2328',
+                textMuted: '#656d76',
+                accent: '#0969da',
+                accentHover: '#0550ae',
+                success: '#1f883d',
+                successHover: '#1a7f37',
+                badgeBg: '#ddf4ff',
+                header: '#f6f8fa',
+                buttonBg: '#f6f8fa',
+                buttonHover: '#eff2f5',
+                pr: '#8250df',
+                issue: '#1a7f37'
+              }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    .dark ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+    html:not(.dark) ::-webkit-scrollbar-thumb { background: #d0d7de; border-radius: 4px; }
+    .tab-active { font-weight: 600; border-bottom: 2px solid #f78166 !important; }
+    @media print {
+      header, .no-print { display: none !important; }
+      body { background: white !important; color: black !important; }
+    }
+  </style>
+</head>
+<body class="bg-gh-light-canvas dark:bg-gh-dark-canvas text-gh-light-text dark:text-gh-dark-text font-sans antialiased min-h-screen flex flex-col selection:bg-blue-500 selection:text-white transition-colors duration-200">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="bg-gh-light-subtle dark:bg-gh-dark-header border-b border-gh-light-border dark:border-gh-dark-border px-4 py-2.5 flex items-center justify-between text-sm sticky top-0 z-40">
+    <div class="flex items-center space-x-3 sm:space-x-4 flex-1">
+      <a href="#" class="text-gh-light-text dark:text-gh-dark-text hover:opacity-80 flex-shrink-0" title="GitHub">
+        <svg height="32" viewBox="0 0 16 16" version="1.1" width="32" class="fill-current">
+          <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+        </svg>
+      </a>
+
+      <div class="relative w-full max-w-xs hidden sm:block">
+        <div class="flex items-center w-full px-2.5 py-1 text-xs rounded-md bg-gh-light-canvas dark:bg-gh-dark-canvas border border-gh-light-border dark:border-gh-dark-border text-gh-light-textMuted dark:text-gh-dark-textMuted">
+          <i class="ph ph-magnifying-glass text-sm mr-2"></i>
+          <span class="flex-1 truncate">Type <kbd class="px-1.5 py-0.5 text-[10px] border border-gh-light-border dark:border-gh-dark-border rounded bg-gh-light-subtle dark:bg-gh-dark-subtle">/</kbd> to search SDET frameworks</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-3 text-xs font-semibold text-gh-light-text dark:text-gh-dark-text">
+        <a href="#pull-requests" onclick="switchTab('pull-requests')" class="hover:text-gh-light-accent dark:hover:text-gh-dark-accent">Shipped PRs</a>
+        <a href="#issues" onclick="switchTab('issues')" class="hover:text-gh-light-accent dark:hover:text-gh-dark-accent">Recruiter FAQs</a>
+        <a href="#insights" onclick="switchTab('insights')" class="hover:text-gh-light-accent dark:hover:text-gh-dark-accent">QA Metrics</a>
+      </nav>
+    </div>
+
+    <!-- Quick Tools -->
+    <div class="flex items-center space-x-2">
+      <!-- Theme Switcher -->
+      <button id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" class="p-1.5 text-xs rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-buttonBg dark:bg-gh-dark-buttonBg hover:bg-gh-light-buttonHover dark:hover:bg-gh-dark-buttonHover">
+        <i id="themeIcon" class="ph ph-sun text-base"></i>
+      </button>
+
+      <!-- Print / PDF -->
+      <button onclick="window.print()" title="Download PDF" class="flex items-center space-x-1 px-2.5 py-1 text-xs font-medium rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-buttonBg dark:bg-gh-dark-buttonBg hover:bg-gh-light-buttonHover dark:hover:bg-gh-dark-buttonHover">
+        <i class="ph ph-printer text-sm"></i>
+        <span class="hidden sm:inline">Print / Save PDF</span>
+      </button>
+
+      <!-- Contact Button -->
+      <a href="mailto:nsvishalkumar@gmail.com" class="px-3 py-1 rounded-md bg-gh-light-success dark:bg-gh-dark-success hover:bg-gh-light-successHover text-white text-xs font-semibold flex items-center space-x-1 shadow-sm">
+        <i class="ph ph-envelope-simple text-sm"></i>
+        <span>Hire Vishal</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- REPO TITLE HEADER -->
+  <div class="bg-gh-light-subtle dark:bg-gh-dark-subtle border-b border-gh-light-border dark:border-gh-dark-border pt-4 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-4">
+        <!-- Breadcrumbs -->
+        <div class="flex items-center flex-wrap gap-2 text-lg md:text-xl">
+          <i class="ph ph-book-bookmark text-gh-light-textMuted dark:text-gh-dark-textMuted text-xl"></i>
+          <span class="font-normal text-gh-light-accent dark:text-gh-dark-accent">nsvishalkumar</span>
+          <span class="text-gh-light-textMuted dark:text-gh-dark-textMuted">/</span>
+          <a href="#" class="font-bold text-gh-light-accent dark:text-gh-dark-accent hover:underline">lead-sdet-portfolio</a>
+          <span class="text-xs font-medium px-2 py-0.5 rounded-full border border-gh-light-border dark:border-gh-dark-border text-gh-light-textMuted dark:text-gh-dark-textMuted">Public</span>
+          <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Open to Lead SDET Roles
+          </span>
+        </div>
+
+        <!-- Repo Action Badges -->
+        <div class="flex items-center flex-wrap gap-2 text-xs font-medium no-print">
+          <button class="flex items-center space-x-1.5 px-2.5 py-1 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-buttonBg dark:bg-gh-dark-buttonBg hover:bg-gh-light-buttonHover dark:hover:bg-gh-dark-buttonHover">
+            <i class="ph ph-push-pin text-sm"></i>
+            <span>Pin</span>
+          </button>
+          <button onclick="handleStar()" class="flex items-center space-x-1 px-3 py-1 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-buttonBg dark:bg-gh-dark-buttonBg hover:bg-gh-light-buttonHover dark:hover:bg-gh-dark-buttonHover text-amber-500">
+            <i class="ph-bold ph-star text-sm"></i>
+            <span class="text-gh-light-text dark:text-gh-dark-text" id="starLabel">Star</span>
+            <span class="ml-1 px-1.5 py-0.2 rounded-full bg-gh-light-muted dark:bg-gh-dark-muted text-[11px] text-gh-light-text dark:text-gh-dark-text" id="starCount">148</span>
+          </button>
+          <button onclick="copyCloneCommand()" class="flex items-center space-x-1 px-2.5 py-1 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-buttonBg dark:bg-gh-dark-buttonBg hover:bg-gh-light-buttonHover dark:hover:bg-gh-dark-buttonHover">
+            <i class="ph ph-git-fork text-sm"></i>
+            <span>Fork Resume</span>
+            <span class="ml-1 px-1.5 py-0.2 rounded-full bg-gh-light-muted dark:bg-gh-dark-muted text-[11px]">32</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="flex space-x-1 sm:space-x-4 overflow-x-auto text-sm border-t border-transparent no-scrollbar">
+        <button onclick="switchTab('code')" id="tabBtn-code" class="tab-item py-2.5 px-3 flex items-center space-x-2 border-b-2 font-medium border-transparent text-gh-light-text dark:text-gh-dark-text tab-active">
+          <i class="ph ph-code text-base"></i>
+          <span>Code / Resume</span>
+        </button>
+        <button onclick="switchTab('issues')" id="tabBtn-issues" class="tab-item py-2.5 px-3 flex items-center space-x-2 border-b-2 font-medium border-transparent text-gh-light-textMuted dark:text-gh-dark-textMuted hover:text-gh-light-text dark:hover:text-gh-dark-text">
+          <i class="ph ph-circle-dashed text-base"></i>
+          <span>Recruiter Issues (FAQ)</span>
+          <span class="px-1.5 py-0.2 text-xs rounded-full bg-gh-light-muted dark:bg-gh-dark-muted">4</span>
+        </button>
+        <button onclick="switchTab('pull-requests')" id="tabBtn-pull-requests" class="tab-item py-2.5 px-3 flex items-center space-x-2 border-b-2 font-medium border-transparent text-gh-light-textMuted dark:text-gh-dark-textMuted hover:text-gh-light-text dark:hover:text-gh-dark-text">
+          <i class="ph ph-git-pull-request text-base"></i>
+          <span>Shipped PRs (Milestones)</span>
+          <span class="px-1.5 py-0.2 text-xs rounded-full bg-gh-light-muted dark:bg-gh-dark-muted">3</span>
+        </button>
+        <button onclick="switchTab('insights')" id="tabBtn-insights" class="tab-item py-2.5 px-3 flex items-center space-x-2 border-b-2 font-medium border-transparent text-gh-light-textMuted dark:text-gh-dark-textMuted hover:text-gh-light-text dark:hover:text-gh-dark-text">
+          <i class="ph ph-chart-line-up text-base"></i>
+          <span>QA Insights & Heatmap</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN VIEW -->
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 flex-1">
+
+    <!-- TAB 1: CODE & RESUME -->
+    <div id="tabContent-code" class="tab-panel">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Main Column (Files & README) -->
+        <div class="lg:col-span-9 space-y-4">
+
+          <!-- Branch & Commit Bar -->
+          <div class="flex flex-wrap items-center justify-between gap-3 text-sm no-print">
+            <div class="flex items-center space-x-2">
+              <span class="flex items-center space-x-1.5 px-3 py-1.5 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-buttonBg dark:bg-gh-dark-buttonBg font-semibold text-xs shadow-sm">
+                <i class="ph ph-git-branch text-sm"></i>
+                <span>main</span>
+              </span>
+              <span class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted flex items-center gap-1">
+                <i class="ph ph-git-commit"></i>
+                <span class="font-semibold text-gh-light-text dark:text-gh-dark-text">8+ Years Experience</span> (4 Enterprises)
+              </span>
+            </div>
+
+            <div class="flex items-center space-x-2">
+              <button onclick="copyCloneCommand()" class="px-3 py-1.5 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-buttonBg dark:bg-gh-dark-buttonBg hover:bg-gh-light-buttonHover dark:hover:bg-gh-dark-buttonHover text-xs font-medium flex items-center space-x-1.5">
+                <i class="ph ph-copy text-sm"></i>
+                <span>Copy Git Clone</span>
+              </button>
+              <a href="mailto:nsvishalkumar@gmail.com" class="px-3 py-1.5 rounded-md bg-gh-light-success dark:bg-gh-dark-success hover:bg-gh-light-successHover text-white text-xs font-semibold flex items-center space-x-1">
+                <i class="ph ph-paper-plane-tilt text-sm"></i>
+                <span>Direct Contact</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Commit Banner -->
+          <div class="rounded-t-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-subtle dark:bg-gh-dark-subtle px-4 py-2.5 flex items-center justify-between text-xs">
+            <div class="flex items-center space-x-2.5 truncate">
+              <div class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px]">VK</div>
+              <span class="font-semibold text-gh-light-text dark:text-gh-dark-text">nsvishalkumar</span>
+              <span class="text-gh-light-textMuted dark:text-gh-dark-textMuted truncate">feat(axp): architected Playwright MCP test automation for subscription workflows @ Trimble</span>
+            </div>
+            <div class="flex items-center space-x-2 text-gh-light-textMuted dark:text-gh-dark-textMuted flex-shrink-0">
+              <span class="font-mono text-[11px] text-gh-light-accent dark:text-gh-dark-accent">9f84a1e</span>
+              <span>•</span>
+              <span>Active Sprint</span>
+            </div>
+          </div>
+
+          <!-- File Explorer Table -->
+          <div class="border-x border-b border-gh-light-border dark:border-gh-dark-border rounded-b-md overflow-hidden text-sm bg-gh-light-canvas dark:bg-gh-dark-canvas divide-y divide-gh-light-borderSubtle dark:divide-gh-dark-borderSubtle">
+            <!-- README.md -->
+            <div class="file-row flex items-center justify-between px-4 py-2 hover:bg-gh-light-subtle dark:hover:bg-gh-dark-subtle cursor-pointer transition-colors" onclick="previewFile('README.md')">
+              <div class="flex items-center space-x-2.5 min-w-[220px]">
+                <i class="ph ph-file-text text-base text-gh-light-textMuted dark:text-gh-dark-textMuted"></i>
+                <span class="font-mono text-xs text-gh-light-text dark:text-gh-dark-text hover:text-gh-light-accent dark:hover:text-gh-dark-accent hover:underline">README.md</span>
+              </div>
+              <div class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted truncate flex-1 px-4 hidden md:block">
+                Master profile, core SDET competencies, framework design, & project chronicles
+              </div>
+              <div class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">Updated recently</div>
+            </div>
+
+            <!-- automation-frameworks.ts -->
+            <div class="file-row flex items-center justify-between px-4 py-2 hover:bg-gh-light-subtle dark:hover:bg-gh-dark-subtle cursor-pointer transition-colors" onclick="previewFile('automation-frameworks.ts')">
+              <div class="flex items-center space-x-2.5 min-w-[220px]">
+                <i class="ph ph-file-code text-base text-blue-400"></i>
+                <span class="font-mono text-xs text-gh-light-text dark:text-gh-dark-text hover:text-gh-light-accent dark:hover:text-gh-dark-accent hover:underline">automation-frameworks.ts</span>
+              </div>
+              <div class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted truncate flex-1 px-4 hidden md:block">
+                Playwright, MCP Playwright, CodeceptJS, Appium, Cucumber BDD architectures
+              </div>
+              <div class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">Apr 2025</div>
+            </div>
+
+            <!-- experience.json -->
+            <div class="file-row flex items-center justify-between px-4 py-2 hover:bg-gh-light-subtle dark:hover:bg-gh-dark-subtle cursor-pointer transition-colors" onclick="previewFile('experience.json')">
+              <div class="flex items-center space-x-2.5 min-w-[220px]">
+                <i class="ph ph-file-code text-base text-amber-500"></i>
+                <span class="font-mono text-xs text-gh-light-text dark:text-gh-dark-text hover:text-gh-light-accent dark:hover:text-gh-dark-accent hover:underline">experience.json</span>
+              </div>
+              <div class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted truncate flex-1 px-4 hidden md:block">
+                Trimble Inc, Prodapt (Vodafone), Deloitte (HCSC), Cognizant (D&B, Zurich)
+              </div>
+              <div class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">2 days ago</div>
+            </div>
+
+            <!-- certifications.md -->
+            <div class="file-row flex items-center justify-between px-4 py-2 hover:bg-gh-light-subtle dark:hover:bg-gh-dark-subtle cursor-pointer transition-colors" onclick="previewFile('certifications.md')">
+              <div class="flex items-center space-x-2.5 min-w-[220px]">
+                <i class="ph ph-certificate text-base text-emerald-500"></i>
+                <span class="font-mono text-xs text-gh-light-text dark:text-gh-dark-text hover:text-gh-light-accent dark:hover:text-gh-dark-accent hover:underline">certifications.md</span>
+              </div>
+              <div class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted truncate flex-1 px-4 hidden md:block">
+                Microsoft Azure AZ-900 & Tricentis TOSCA Automation Specialist 1
+              </div>
+              <div class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">Verified</div>
+            </div>
+
+            <!-- contact.env -->
+            <div class="file-row flex items-center justify-between px-4 py-2 hover:bg-gh-light-subtle dark:hover:bg-gh-dark-subtle cursor-pointer transition-colors" onclick="previewFile('contact.env')">
+              <div class="flex items-center space-x-2.5 min-w-[220px]">
+                <i class="ph ph-key text-base text-red-400"></i>
+                <span class="font-mono text-xs text-gh-light-text dark:text-gh-dark-text hover:text-gh-light-accent dark:hover:text-gh-dark-accent hover:underline">contact.env</span>
+              </div>
+              <div class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted truncate flex-1 px-4 hidden md:block">
+                Direct phone (+91-8870488266), email, location, current availability
+              </div>
+              <div class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">Immediate</div>
+            </div>
+          </div>
+
+          <!-- FILE VIEWER OVERLAY -->
+          <div id="codeFileViewer" class="hidden rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-canvas dark:bg-gh-dark-canvas overflow-hidden mt-4">
+            <div class="bg-gh-light-subtle dark:bg-gh-dark-subtle px-4 py-2.5 border-b border-gh-light-border dark:border-gh-dark-border flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <i class="ph ph-file-code text-sm"></i>
+                <span id="codeFileName" class="font-mono text-xs font-semibold">file</span>
+                <span id="codeFileLines" class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted"></span>
+              </div>
+              <button onclick="closeFileViewer()" class="text-xs px-2.5 py-1 rounded border border-gh-light-border dark:border-gh-dark-border hover:bg-gh-light-buttonHover dark:hover:bg-gh-dark-buttonHover">
+                Back to README.md
+              </button>
+            </div>
+            <pre class="p-4 text-xs font-mono overflow-x-auto bg-gh-light-subtle/50 dark:bg-gh-dark-header/60 leading-relaxed text-gh-light-text dark:text-gh-dark-text"><code id="codeFileContent"></code></pre>
+          </div>
+
+          <!-- RENDERED README -->
+          <div id="readmeContainer" class="rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-canvas dark:bg-gh-dark-canvas overflow-hidden">
+            <!-- Readme header -->
+            <div class="bg-gh-light-subtle dark:bg-gh-dark-subtle px-4 py-2.5 border-b border-gh-light-border dark:border-gh-dark-border flex items-center justify-between text-xs sticky top-12 z-10 backdrop-blur-sm bg-opacity-90">
+              <div class="flex items-center space-x-2 font-semibold">
+                <i class="ph ph-list text-sm"></i>
+                <span>README.md</span>
+              </div>
+              <div class="flex items-center space-x-3 text-gh-light-textMuted dark:text-gh-dark-textMuted">
+                <span>Markdown Rendered</span>
+                <button onclick="copyReadmeText()" title="Copy Markdown" class="hover:text-gh-light-text dark:hover:text-gh-dark-text">
+                  <i class="ph ph-copy text-sm"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Readme content -->
+            <div class="p-6 sm:p-8 space-y-8">
+
+              <!-- HERO BANNER -->
+              <div class="border-b border-gh-light-border dark:border-gh-dark-border pb-6">
+                <div class="flex flex-col sm:flex-row items-start gap-5">
+                  <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-emerald-600 via-teal-700 to-blue-600 text-white flex items-center justify-center font-bold text-2xl shadow-md border-2 border-gh-light-accent dark:border-gh-dark-accent">
+                    NSV
+                  </div>
+                  <div class="flex-1 space-y-2">
+                    <div class="flex flex-wrap items-center gap-2.5">
+                      <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">N S Vishal Kumar</h1>
+                      <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20 font-mono font-medium">Lead SDET</span>
+                      <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-mono font-medium">8+ Years IT</span>
+                    </div>
+                    <p class="text-sm font-semibold text-gh-light-accent dark:text-gh-dark-accent">
+                      Lead SDET @ Trimble Inc. | Playwright & MCP Playwright Architect | Web, Mobile & API Automation
+                    </p>
+                    <p class="text-xs sm:text-sm text-gh-light-textMuted dark:text-gh-dark-textMuted leading-relaxed max-w-3xl">
+                      Lead Software Development Engineer in Test with 8+ years across Product-based & Enterprise ecosystems (SaaS, Telecom, Fintech, Health Insurance, Retail). Specializing in scalable test automation frameworks with Playwright, MCP Playwright, CodeceptJS, Appium, STF server administration, and CI/CD quality gate enforcement.
+                    </p>
+
+                    <!-- Contact Pill Badges -->
+                    <div class="flex flex-wrap items-center gap-2 pt-2 text-xs">
+                      <a href="mailto:nsvishalkumar@gmail.com" class="px-2.5 py-1 rounded-md bg-gh-light-buttonBg dark:bg-gh-dark-buttonBg border border-gh-light-border dark:border-gh-dark-border hover:border-gh-light-accent flex items-center space-x-1.5 transition-colors">
+                        <i class="ph ph-envelope-simple text-red-500"></i>
+                        <span>nsvishalkumar@gmail.com</span>
+                      </a>
+                      <a href="tel:+918870488266" class="px-2.5 py-1 rounded-md bg-gh-light-buttonBg dark:bg-gh-dark-buttonBg border border-gh-light-border dark:border-gh-dark-border hover:border-gh-light-accent flex items-center space-x-1.5 transition-colors">
+                        <i class="ph ph-phone text-emerald-500"></i>
+                        <span>+91-8870488266</span>
+                      </a>
+                      <span class="px-2.5 py-1 rounded-md bg-gh-light-buttonBg dark:bg-gh-dark-buttonBg border border-gh-light-border dark:border-gh-dark-border flex items-center space-x-1.5">
+                        <i class="ph ph-map-pin text-blue-500"></i>
+                        <span>Chennai / India (Open to Hybrid & Remote)</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- METRICS HIGHLIGHT RIBBON -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 py-1">
+                <div class="p-3 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-subtle/50 dark:bg-gh-dark-subtle/40">
+                  <div class="text-[11px] font-semibold text-gh-light-textMuted dark:text-gh-dark-textMuted uppercase">Industry Experience</div>
+                  <div class="text-xl font-bold mt-0.5 text-gh-light-accent dark:text-gh-dark-accent">8+ Years</div>
+                  <div class="text-[10px] text-gh-light-textMuted dark:text-gh-dark-textMuted">Enterprise & Product QA</div>
+                </div>
+                <div class="p-3 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-subtle/50 dark:bg-gh-dark-subtle/40">
+                  <div class="text-[11px] font-semibold text-gh-light-textMuted dark:text-gh-dark-textMuted uppercase">Core Frameworks</div>
+                  <div class="text-xl font-bold mt-0.5 text-emerald-500">Playwright & Appium</div>
+                  <div class="text-[10px] text-gh-light-textMuted dark:text-gh-dark-textMuted">Web, Mobile (iOS/Android), API</div>
+                </div>
+                <div class="p-3 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-subtle/50 dark:bg-gh-dark-subtle/40">
+                  <div class="text-[11px] font-semibold text-gh-light-textMuted dark:text-gh-dark-textMuted uppercase">Cloud & CI/CD</div>
+                  <div class="text-xl font-bold mt-0.5 text-purple-500">Azure AZ-900</div>
+                  <div class="text-[10px] text-gh-light-textMuted dark:text-gh-dark-textMuted">Jenkins Post-Merge Gates</div>
+                </div>
+                <div class="p-3 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-subtle/50 dark:bg-gh-dark-subtle/40">
+                  <div class="text-[11px] font-semibold text-gh-light-textMuted dark:text-gh-dark-textMuted uppercase">Engineering Leadership</div>
+                  <div class="text-xl font-bold mt-0.5 text-amber-500">Lead SDET</div>
+                  <div class="text-[10px] text-gh-light-textMuted dark:text-gh-dark-textMuted">Team mentoring & test strategy</div>
+                </div>
+              </div>
+
+              <!-- PROFESSIONAL EXPERIENCE SECTION -->
+              <section class="space-y-4">
+                <div class="flex items-center space-x-2 border-b border-gh-light-border dark:border-gh-dark-border pb-2">
+                  <i class="ph-bold ph-briefcase text-lg text-gh-light-accent dark:text-gh-dark-accent"></i>
+                  <h2 class="text-xl font-bold">Professional Experience</h2>
+                </div>
+
+                <div class="relative pl-6 space-y-8 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-gh-light-border dark:before:bg-gh-dark-border">
+
+                  <!-- 1. Trimble Inc. -->
+                  <div class="relative group">
+                    <span class="absolute -left-6 mt-1 flex h-4 w-4 items-center justify-center rounded-full bg-gh-light-subtle dark:bg-gh-dark-subtle border-2 border-gh-light-border dark:border-gh-dark-border group-hover:border-gh-light-accent transition-colors">
+                      <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                    </span>
+                    <div class="space-y-1.5">
+                      <div class="flex flex-wrap items-center justify-between gap-1">
+                        <h3 class="text-base font-bold">Lead SDET — Trimble Inc.</h3>
+                        <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-semibold border border-emerald-500/20">Apr 2025 - Present</span>
+                      </div>
+                      <div class="text-xs font-semibold text-gh-light-accent dark:text-gh-dark-accent">
+                        Project: Next Generation Subscription Service (NGSS) | App: Account Experience Platform (AXP)
+                      </div>
+                      <p class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted leading-relaxed">
+                        AXP is Trimble’s mission-critical subscription and entitlement platform connecting physical and digital geospatial, construction, and agricultural offerings.
+                      </p>
+                      <ul class="list-disc list-outside pl-4 text-xs space-y-1.5 pt-1 text-gh-light-text/90 dark:text-gh-dark-text/90">
+                        <li>Prepare and own end-to-end Test Plans and Test Strategies aligned with sprint commitments and subscription-based workflows.</li>
+                        <li>Lead, mentor, and guide a QA team of 3 members, managing story distribution, code reviews, and sprint commitments.</li>
+                        <li>Design, develop, and maintain automation scripts using <strong>Playwright (including MCP Playwright)</strong> for critical account management and subscription journeys.</li>
+                        <li>Lead lower-environment deployments with automated post-merge smoke tests for instantaneous release validation.</li>
+                        <li>Create and maintain dashboards tracking defect metrics, test execution status, and overall product quality health for stakeholders.</li>
+                      </ul>
+                      <div class="flex flex-wrap gap-1.5 pt-2">
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">Playwright</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">MCP Playwright</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">Cursor AI IDE</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">API Testing</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">CI Smoke Gates</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 2. Prodapt Solutions -->
+                  <div class="relative group">
+                    <span class="absolute -left-6 mt-1 flex h-4 w-4 items-center justify-center rounded-full bg-gh-light-subtle dark:bg-gh-dark-subtle border-2 border-gh-light-border dark:border-gh-dark-border group-hover:border-gh-light-accent transition-colors">
+                      <span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                    </span>
+                    <div class="space-y-1.5">
+                      <div class="flex flex-wrap items-center justify-between gap-1">
+                        <h3 class="text-base font-bold">Lead Engineer — Prodapt Solutions</h3>
+                        <span class="text-xs font-mono px-2 py-0.5 rounded bg-gh-light-muted dark:bg-gh-dark-muted text-gh-light-textMuted dark:text-gh-dark-textMuted">Apr 2023 - Apr 2025</span>
+                      </div>
+                      <div class="text-xs font-semibold text-gh-light-accent dark:text-gh-dark-accent">
+                        Client: Vodafone | App: M-Pesa Mobile App (Android) & Fintech Web App
+                      </div>
+                      <p class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted leading-relaxed">
+                        M-Pesa is Africa’s largest mobile money platform handling hundreds of millions of fintech transactions.
+                      </p>
+                      <ul class="list-disc list-outside pl-4 text-xs space-y-1.5 pt-1 text-gh-light-text/90 dark:text-gh-dark-text/90">
+                        <li>Spearheaded web automation testing leveraging <strong>CodeceptJS</strong> and JavaScript across complex fintech payment flows.</li>
+                        <li>Configured and managed an <strong>STF (Smartphone Test Farm) server</strong> in an Ubuntu server environment with SSL certificates for remote mobile automation.</li>
+                        <li>Managed Windows remote execution nodes to ensure stable, parallel regression suites.</li>
+                        <li>Mentored and guided web testing engineers to resolve technical hurdles and maintain delivery velocity.</li>
+                      </ul>
+                      <div class="flex flex-wrap gap-1.5 pt-2">
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">CodeceptJS</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">JavaScript</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">STF Ubuntu Server</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">SSL Management</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">Fintech Testing</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 3. Hashedin by Deloitte -->
+                  <div class="relative group">
+                    <span class="absolute -left-6 mt-1 flex h-4 w-4 items-center justify-center rounded-full bg-gh-light-subtle dark:bg-gh-dark-subtle border-2 border-gh-light-border dark:border-gh-dark-border group-hover:border-gh-light-accent transition-colors">
+                      <span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span>
+                    </span>
+                    <div class="space-y-1.5">
+                      <div class="flex flex-wrap items-center justify-between gap-1">
+                        <h3 class="text-base font-bold">SDET II — Hashedin by Deloitte</h3>
+                        <span class="text-xs font-mono px-2 py-0.5 rounded bg-gh-light-muted dark:bg-gh-dark-muted text-gh-light-textMuted dark:text-gh-dark-textMuted">Aug 2021 - Mar 2023</span>
+                      </div>
+                      <div class="text-xs font-semibold text-gh-light-accent dark:text-gh-dark-accent">
+                        Client: HCSC (Health Care Service Corporation) | App: MyBlueRX Mobile App (iOS & Android)
+                      </div>
+                      <p class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted leading-relaxed">
+                        HCSC is the largest customer-owned health insurer in the US (Blue Cross and Blue Shield Plans across IL, MT, NM, OK, TX).
+                      </p>
+                      <ul class="list-disc list-outside pl-4 text-xs space-y-1.5 pt-1 text-gh-light-text/90 dark:text-gh-dark-text/90">
+                        <li>Engineered mobile automation suites using <strong>Java, Appium</strong> and integrated seamlessly with the cloud device grid in <strong>Perfecto</strong>.</li>
+                        <li>Configured and managed Android Studio (APK) and Xcode (IPA) compilation and automated deployments into Perfecto.</li>
+                        <li>Integrated API testing methods within the automation test harness for end-to-end data validation.</li>
+                        <li>Monitored <strong>Dynatrace</strong> telemetry events to proactively catch app crashes and major functionality anomalies.</li>
+                      </ul>
+                      <div class="flex flex-wrap gap-1.5 pt-2">
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">Java</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">Appium</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">Perfecto Cloud</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">Xcode & Android Studio</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">Dynatrace</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 4. Cognizant -->
+                  <div class="relative group">
+                    <span class="absolute -left-6 mt-1 flex h-4 w-4 items-center justify-center rounded-full bg-gh-light-subtle dark:bg-gh-dark-subtle border-2 border-gh-light-border dark:border-gh-dark-border group-hover:border-gh-light-accent transition-colors">
+                      <span class="h-1.5 w-1.5 rounded-full bg-purple-500"></span>
+                    </span>
+                    <div class="space-y-1.5">
+                      <div class="flex flex-wrap items-center justify-between gap-1">
+                        <h3 class="text-base font-bold">Associate — Cognizant</h3>
+                        <span class="text-xs font-mono px-2 py-0.5 rounded bg-gh-light-muted dark:bg-gh-dark-muted text-gh-light-textMuted dark:text-gh-dark-textMuted">Dec 2017 - Aug 2021</span>
+                      </div>
+                      <div class="text-xs font-semibold text-gh-light-accent dark:text-gh-dark-accent">
+                        Clients: Dun & Bradstreet (Registration Portal) & Zurich Insurance Company (RCIS)
+                      </div>
+                      <ul class="list-disc list-outside pl-4 text-xs space-y-1.5 pt-1 text-gh-light-text/90 dark:text-gh-dark-text/90">
+                        <li>Developed Selenium automation frameworks using <strong>JBehave (BDD)</strong> for Dun & Bradstreet registration workflows.</li>
+                        <li>Configured daily automated smoke acceptance jobs in <strong>Jenkins</strong> preventing defect leakages to production environments.</li>
+                        <li>Built regression test suites using CITS (Cognizant Intelligent Test Scripter) for Zurich Insurance RCIS platform.</li>
+                        <li>Provided comprehensive UAT clarification support and managed test artifacts in JIRA, HP ALM, and VersionOne.</li>
+                      </ul>
+                      <div class="flex flex-wrap gap-1.5 pt-2">
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">Selenium</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">JBehave (BDD)</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">Jenkins CI</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded font-mono bg-gh-light-subtle dark:bg-gh-dark-subtle border border-gh-light-border dark:border-gh-dark-border">HP ALM / JIRA</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </section>
+
+              <!-- TECHNICAL SKILLS MATRIX -->
+              <section class="space-y-4">
+                <div class="flex items-center space-x-2 border-b border-gh-light-border dark:border-gh-dark-border pb-2">
+                  <i class="ph-bold ph-cpu text-lg text-gh-light-accent dark:text-gh-dark-accent"></i>
+                  <h2 class="text-xl font-bold">Technical Arsenal & Test Architecture</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Category 1 -->
+                  <div class="rounded-md border border-gh-light-border dark:border-gh-dark-border p-4 bg-gh-light-subtle/30 dark:bg-gh-dark-subtle/20 space-y-2">
+                    <h3 class="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 text-gh-light-accent dark:text-gh-dark-accent">
+                      <i class="ph ph-browsers"></i> Test Automation & Tools
+                    </h3>
+                    <div class="flex flex-wrap gap-1.5 pt-1">
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-medium">MCP Playwright</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-medium">Playwright</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Selenium</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Appium</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Postman</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Cursor AI IDE</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Insomnia</span>
+                    </div>
+                  </div>
+
+                  <!-- Category 2 -->
+                  <div class="rounded-md border border-gh-light-border dark:border-gh-dark-border p-4 bg-gh-light-subtle/30 dark:bg-gh-dark-subtle/20 space-y-2">
+                    <h3 class="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 text-gh-light-accent dark:text-gh-dark-accent">
+                      <i class="ph ph-git-merge"></i> Frameworks & Methodologies
+                    </h3>
+                    <div class="flex flex-wrap gap-1.5 pt-1">
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">BDD Cucumber</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">CodeceptJS</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">JBehave</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Agile Scrum / Sprints</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Onshore-Offshore Delivery</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Waterfall</span>
+                    </div>
+                  </div>
+
+                  <!-- Category 3 -->
+                  <div class="rounded-md border border-gh-light-border dark:border-gh-dark-border p-4 bg-gh-light-subtle/30 dark:bg-gh-dark-subtle/20 space-y-2">
+                    <h3 class="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 text-gh-light-accent dark:text-gh-dark-accent">
+                      <i class="ph ph-device-mobile"></i> Mobile, Cloud & Infra
+                    </h3>
+                    <div class="flex flex-wrap gap-1.5 pt-1">
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20 font-medium">STF Server (Ubuntu)</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20 font-medium">Perfecto Cloud</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Android Studio</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Xcode</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Datadog</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Dynatrace</span>
+                    </div>
+                  </div>
+
+                  <!-- Category 4 -->
+                  <div class="rounded-md border border-gh-light-border dark:border-gh-dark-border p-4 bg-gh-light-subtle/30 dark:bg-gh-dark-subtle/20 space-y-2">
+                    <h3 class="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 text-gh-light-accent dark:text-gh-dark-accent">
+                      <i class="ph ph-terminal"></i> Languages & Management
+                    </h3>
+                    <div class="flex flex-wrap gap-1.5 pt-1">
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">JavaScript</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Java</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">SQL / MySQL</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Git / SourceTree</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">JIRA</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">HP ALM</span>
+                      <span class="px-2.5 py-1 text-xs rounded-full bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border font-medium">Zephyr / QTest</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- EDUCATION & CERTIFICATIONS -->
+              <section class="space-y-4">
+                <div class="flex items-center space-x-2 border-b border-gh-light-border dark:border-gh-dark-border pb-2">
+                  <i class="ph-bold ph-certificate text-lg text-gh-light-accent dark:text-gh-dark-accent"></i>
+                  <h2 class="text-xl font-bold">Education & Official Credentials</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Education -->
+                  <div class="rounded-md border border-gh-light-border dark:border-gh-dark-border p-4 bg-gh-light-canvas dark:bg-gh-dark-canvas space-y-1.5">
+                    <div class="flex justify-between items-start">
+                      <h3 class="font-bold text-xs">B.E. in Electronics & Communication (ECE)</h3>
+                      <span class="text-[11px] font-mono text-gh-light-textMuted dark:text-gh-dark-textMuted">Graduated 2017</span>
+                    </div>
+                    <p class="text-xs font-semibold text-gh-light-accent dark:text-gh-dark-accent">Anna University</p>
+                    <p class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">
+                      Mepco Schlenk Engineering College, Sivakasi. Focus on Microprocessors, Digital Signal Processing, and Software Engineering.
+                    </p>
+                  </div>
+
+                  <!-- Certifications -->
+                  <div class="rounded-md border border-gh-light-border dark:border-gh-dark-border p-4 bg-gh-light-canvas dark:bg-gh-dark-canvas space-y-2">
+                    <h3 class="font-bold text-xs">Industry Certifications</h3>
+                    <div class="space-y-1.5 text-xs">
+                      <div class="flex items-center space-x-2">
+                        <i class="ph-bold ph-check-circle text-emerald-500"></i>
+                        <span class="font-medium">Microsoft Certified: Azure Fundamentals (AZ-900)</span>
+                        <span class="text-[10px] text-gh-light-textMuted dark:text-gh-dark-textMuted font-mono">02/2021</span>
+                      </div>
+                      <div class="flex items-center space-x-2">
+                        <i class="ph-bold ph-check-circle text-emerald-500"></i>
+                        <span class="font-medium">Tricentis Automation Specialist 1 (TOSCA)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- DECLARATION -->
+              <div class="pt-4 border-t border-gh-light-border dark:border-gh-dark-border text-center text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted flex flex-col sm:flex-row justify-between items-center gap-2">
+                <span>I hereby declare that the information furnished above is true to the best of my knowledge.</span>
+                <span class="font-semibold text-gh-light-text dark:text-gh-dark-text">— N S Vishal Kumar</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: GitHub Sidebar (3 cols) -->
+        <aside class="lg:col-span-3 space-y-6 text-sm">
+          <!-- About Box -->
+          <div class="space-y-3">
+            <h3 class="font-semibold text-gh-light-text dark:text-gh-dark-text text-base">About</h3>
+            <p class="text-gh-light-textMuted dark:text-gh-dark-textMuted text-xs leading-relaxed">
+              Official interactive resume of <strong>N S Vishal Kumar</strong>, Lead SDET at Trimble Inc. Architecting robust end-to-end Playwright and Appium test suites across Enterprise and SaaS platforms.
+            </p>
+
+            <div class="space-y-2 text-xs pt-2">
+              <div class="flex items-center space-x-2">
+                <i class="ph ph-envelope-simple text-sm text-gh-light-textMuted dark:text-gh-dark-textMuted"></i>
+                <a href="mailto:nsvishalkumar@gmail.com" class="text-gh-light-accent dark:text-gh-dark-accent hover:underline truncate">nsvishalkumar@gmail.com</a>
+              </div>
+              <div class="flex items-center space-x-2">
+                <i class="ph ph-phone text-sm text-gh-light-textMuted dark:text-gh-dark-textMuted"></i>
+                <span class="text-gh-light-textMuted dark:text-gh-dark-textMuted">+91-8870488266</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <i class="ph ph-map-pin text-sm text-gh-light-textMuted dark:text-gh-dark-textMuted"></i>
+                <span class="text-gh-light-textMuted dark:text-gh-dark-textMuted">Chennai, India</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <i class="ph ph-briefcase text-sm text-emerald-500"></i>
+                <span class="text-gh-light-textMuted dark:text-gh-dark-textMuted font-medium">Lead SDET @ Trimble</span>
+              </div>
+            </div>
+
+            <!-- Topics -->
+            <div class="pt-3">
+              <h4 class="text-xs font-semibold text-gh-light-textMuted dark:text-gh-dark-textMuted uppercase tracking-wider mb-2">Topics</h4>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-0.5 text-xs rounded-full bg-blue-500/10 text-gh-light-accent dark:text-gh-dark-accent font-medium">playwright</span>
+                <span class="px-2.5 py-0.5 text-xs rounded-full bg-blue-500/10 text-gh-light-accent dark:text-gh-dark-accent font-medium">mcp-playwright</span>
+                <span class="px-2.5 py-0.5 text-xs rounded-full bg-blue-500/10 text-gh-light-accent dark:text-gh-dark-accent font-medium">appium</span>
+                <span class="px-2.5 py-0.5 text-xs rounded-full bg-blue-500/10 text-gh-light-accent dark:text-gh-dark-accent font-medium">selenium</span>
+                <span class="px-2.5 py-0.5 text-xs rounded-full bg-blue-500/10 text-gh-light-accent dark:text-gh-dark-accent font-medium">lead-sdet</span>
+                <span class="px-2.5 py-0.5 text-xs rounded-full bg-blue-500/10 text-gh-light-accent dark:text-gh-dark-accent font-medium">ci-cd-quality-gates</span>
+              </div>
+            </div>
+          </div>
+
+          <hr class="border-gh-light-border dark:border-gh-dark-border">
+
+          <!-- Releases -->
+          <div class="space-y-3">
+            <h3 class="font-semibold text-gh-light-text dark:text-gh-dark-text text-base">
+              Releases <span class="text-xs font-normal text-gh-light-textMuted dark:text-gh-dark-textMuted">4 milestones</span>
+            </h3>
+            <div class="space-y-3">
+              <div class="flex items-start space-x-2">
+                <i class="ph-bold ph-tag text-emerald-500 text-sm mt-0.5"></i>
+                <div class="text-xs">
+                  <div class="font-semibold text-gh-light-text dark:text-gh-dark-text flex items-center gap-1.5">
+                    <span>v8.2.0</span>
+                    <span class="px-1.5 py-0.2 text-[10px] rounded-full bg-emerald-500/10 text-emerald-500 font-medium">Latest</span>
+                  </div>
+                  <p class="text-gh-light-textMuted dark:text-gh-dark-textMuted text-[11px] mt-0.5">Promoted to Lead SDET @ Trimble Inc.</p>
+                  <span class="text-[10px] text-gh-light-textMuted dark:text-gh-dark-textMuted">Apr 2025</span>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-2">
+                <i class="ph ph-tag text-gh-light-textMuted dark:text-gh-dark-textMuted text-sm mt-0.5"></i>
+                <div class="text-xs">
+                  <div class="font-semibold text-gh-light-text dark:text-gh-dark-text">v6.0.0</div>
+                  <p class="text-gh-light-textMuted dark:text-gh-dark-textMuted text-[11px] mt-0.5">Lead Engineer for Vodafone M-Pesa @ Prodapt</p>
+                  <span class="text-[10px] text-gh-light-textMuted dark:text-gh-dark-textMuted">Apr 2023</span>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-2">
+                <i class="ph ph-tag text-gh-light-textMuted dark:text-gh-dark-textMuted text-sm mt-0.5"></i>
+                <div class="text-xs">
+                  <div class="font-semibold text-gh-light-text dark:text-gh-dark-text">v4.0.0</div>
+                  <p class="text-gh-light-textMuted dark:text-gh-dark-textMuted text-[11px] mt-0.5">SDET II for HCSC BlueCross @ Deloitte</p>
+                  <span class="text-[10px] text-gh-light-textMuted dark:text-gh-dark-textMuted">Aug 2021</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="border-gh-light-border dark:border-gh-dark-border">
+
+          <!-- Language breakdown -->
+          <div class="space-y-2">
+            <h3 class="font-semibold text-gh-light-text dark:text-gh-dark-text text-base">Automation Languages</h3>
+            <div class="h-2 w-full rounded-full overflow-hidden flex bg-gh-light-muted dark:bg-gh-dark-muted">
+              <div class="bg-amber-400 h-full" style="width: 48%" title="JavaScript 48%"></div>
+              <div class="bg-orange-600 h-full" style="width: 32%" title="Java 32%"></div>
+              <div class="bg-blue-600 h-full" style="width: 12%" title="TypeScript 12%"></div>
+              <div class="bg-emerald-500 h-full" style="width: 8%" title="SQL & Shell 8%"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-y-1 gap-x-2 text-xs pt-1">
+              <div class="flex items-center space-x-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                <span class="font-semibold">JavaScript</span>
+                <span class="text-gh-light-textMuted dark:text-gh-dark-textMuted">48%</span>
+              </div>
+              <div class="flex items-center space-x-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-orange-600"></span>
+                <span class="font-semibold">Java</span>
+                <span class="text-gh-light-textMuted dark:text-gh-dark-textMuted">32%</span>
+              </div>
+              <div class="flex items-center space-x-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+                <span class="font-semibold">TypeScript</span>
+                <span class="text-gh-light-textMuted dark:text-gh-dark-textMuted">12%</span>
+              </div>
+              <div class="flex items-center space-x-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <span class="font-semibold">SQL / Shell</span>
+                <span class="text-gh-light-textMuted dark:text-gh-dark-textMuted">8%</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- TAB 2: ISSUES (RECRUITER FAQ) -->
+    <div id="tabContent-issues" class="tab-panel hidden space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-semibold flex items-center gap-2">
+          <i class="ph ph-circle-dashed text-emerald-500"></i>
+          Recruiter & Hiring Manager Inquiries
+        </h2>
+        <a href="mailto:nsvishalkumar@gmail.com" class="px-3 py-1 bg-gh-light-success dark:bg-gh-dark-success text-white rounded-md text-xs font-semibold">
+          Open New Inquiry
+        </a>
+      </div>
+
+      <div class="border border-gh-light-border dark:border-gh-dark-border rounded-md overflow-hidden bg-gh-light-canvas dark:bg-gh-dark-canvas divide-y divide-gh-light-border dark:divide-gh-dark-border">
+
+        <!-- FAQ 1 -->
+        <div class="p-4 hover:bg-gh-light-subtle dark:hover:bg-gh-dark-subtle transition-colors">
+          <div class="flex items-start space-x-3">
+            <i class="ph-bold ph-circle-dashed text-emerald-500 text-base mt-0.5"></i>
+            <div class="flex-1 space-y-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="font-semibold text-sm">Issue #104: What makes Vishal uniquely qualified for Lead SDET roles?</span>
+                <span class="px-2 py-0.2 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">leadership</span>
+              </div>
+              <p class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">#104 opened by technical-recruiter</p>
+              <div class="text-xs bg-gh-light-subtle dark:bg-gh-dark-subtle p-3 rounded-md border border-gh-light-border dark:border-gh-dark-border text-gh-light-text/90 dark:text-gh-dark-text/90 leading-relaxed">
+                <div class="font-semibold mb-1 text-[11px] text-gh-light-accent dark:text-gh-dark-accent">N S Vishal Kumar (Lead SDET reply):</div>
+                I combine 8+ years of hands-on technical automation mastery (Playwright, MCP Playwright, Appium, CodeceptJS) with proven team leadership experience. At Trimble, I lead a QA team of 3 members, establish test strategies for subscription platforms, and configure automated CI/CD smoke gates.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="p-4 hover:bg-gh-light-subtle dark:hover:bg-gh-dark-subtle transition-colors">
+          <div class="flex items-start space-x-3">
+            <i class="ph-bold ph-circle-dashed text-emerald-500 text-base mt-0.5"></i>
+            <div class="flex-1 space-y-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="font-semibold text-sm">Issue #103: What experience do you have with mobile infrastructure and real devices?</span>
+                <span class="px-2 py-0.2 rounded-full text-[10px] font-medium bg-blue-500/10 text-blue-500 border border-blue-500/20">mobile-infra</span>
+              </div>
+              <p class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">#103 opened by qa-director</p>
+              <div class="text-xs bg-gh-light-subtle dark:bg-gh-dark-subtle p-3 rounded-md border border-gh-light-border dark:border-gh-dark-border text-gh-light-text/90 dark:text-gh-dark-text/90 leading-relaxed">
+                <div class="font-semibold mb-1 text-[11px] text-gh-light-accent dark:text-gh-dark-accent">N S Vishal Kumar (Lead SDET reply):</div>
+                Extensive. At Prodapt, I installed and administered an STF (Smartphone Test Farm) server on Ubuntu with SSL certificates to run automated tests on remote real devices for Vodafone M-Pesa. At Deloitte, I integrated Appium with the cloud device grid in Perfecto, compiling APK and IPA builds via Android Studio and Xcode.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="p-4 hover:bg-gh-light-subtle dark:hover:bg-gh-dark-subtle transition-colors">
+          <div class="flex items-start space-x-3">
+            <i class="ph-bold ph-circle-dashed text-emerald-500 text-base mt-0.5"></i>
+            <div class="flex-1 space-y-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="font-semibold text-sm">Issue #102: What is your notice period and current location?</span>
+                <span class="px-2 py-0.2 rounded-full text-[10px] font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">availability</span>
+              </div>
+              <p class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">#102 opened by talent-partner</p>
+              <div class="text-xs bg-gh-light-subtle dark:bg-gh-dark-subtle p-3 rounded-md border border-gh-light-border dark:border-gh-dark-border text-gh-light-text/90 dark:text-gh-dark-text/90 leading-relaxed">
+                <div class="font-semibold mb-1 text-[11px] text-gh-light-accent dark:text-gh-dark-accent">N S Vishal Kumar (Lead SDET reply):</div>
+                I am based in Chennai, India, and open to hybrid or remote opportunities across India and global time zones. Please reach out to <a href="mailto:nsvishalkumar@gmail.com" class="text-gh-light-accent underline">nsvishalkumar@gmail.com</a> or +91-8870488266.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 3: PULL REQUESTS (SHIPPED RELEASES) -->
+    <div id="tabContent-pull-requests" class="tab-panel hidden space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-semibold flex items-center gap-2">
+          <i class="ph ph-git-pull-request text-purple-500"></i>
+          Merged Architecture Deliverables & Impact PRs
+        </h2>
+        <span class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">All merged to main branch</span>
+      </div>
+
+      <div class="border border-gh-light-border dark:border-gh-dark-border rounded-md overflow-hidden bg-gh-light-canvas dark:bg-gh-dark-canvas divide-y divide-gh-light-border dark:divide-gh-dark-border">
+
+        <div class="p-4 hover:bg-gh-light-subtle dark:hover:bg-gh-dark-subtle transition-colors">
+          <div class="flex items-start space-x-3">
+            <i class="ph-bold ph-git-pull-request text-purple-500 text-base mt-0.5"></i>
+            <div class="flex-1 space-y-1.5">
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-sm">PR #48: feat(trimble-axp): Playwright MCP End-to-End Subscription Automation</span>
+                <span class="px-2 py-0.2 rounded-full text-[10px] font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">merged</span>
+              </div>
+              <p class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">#48 merged by nsvishalkumar into Trimble Inc. / NGSS-AXP</p>
+              <div class="text-xs text-gh-light-text/90 dark:text-gh-dark-text/90 mt-1">
+                Delivered full Playwright and MCP Playwright automation test suite for customer accounts, entitlements, and subscription billing journeys, integrated into lower-environment post-merge smoke triggers.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 hover:bg-gh-light-subtle dark:hover:bg-gh-dark-subtle transition-colors">
+          <div class="flex items-start space-x-3">
+            <i class="ph-bold ph-git-pull-request text-purple-500 text-base mt-0.5"></i>
+            <div class="flex-1 space-y-1.5">
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-sm">PR #35: infra(vodafone-mpesa): STF Server Deployment on Ubuntu with SSL Certification</span>
+                <span class="px-2 py-0.2 rounded-full text-[10px] font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">merged</span>
+              </div>
+              <p class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">#35 merged by nsvishalkumar into Prodapt / Vodafone M-Pesa</p>
+              <div class="text-xs text-gh-light-text/90 dark:text-gh-dark-text/90 mt-1">
+                Established continuous mobile test execution framework connecting remote Android test instances to CodeceptJS automation test runners.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 hover:bg-gh-light-subtle dark:hover:bg-gh-dark-subtle transition-colors">
+          <div class="flex items-start space-x-3">
+            <i class="ph-bold ph-git-pull-request text-purple-500 text-base mt-0.5"></i>
+            <div class="flex-1 space-y-1.5">
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-sm">PR #22: feat(hcsc-bluecross): Appium + Perfecto Hybrid Mobile Testing Suite</span>
+                <span class="px-2 py-0.2 rounded-full text-[10px] font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">merged</span>
+              </div>
+              <p class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">#22 merged by nsvishalkumar into Deloitte / HCSC-MyBlueRX</p>
+              <div class="text-xs text-gh-light-text/90 dark:text-gh-dark-text/90 mt-1">
+                Unified iOS and Android automated regression for MyBlueRX prescription platform with Dynatrace telemetry alerting on app crashes.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 4: QA INSIGHTS & ACTIVITY HEATMAP -->
+    <div id="tabContent-insights" class="tab-panel hidden space-y-6">
+      <div class="rounded-md border border-gh-light-border dark:border-gh-dark-border p-5 bg-gh-light-canvas dark:bg-gh-dark-canvas space-y-4">
+        <h3 class="font-semibold text-base flex items-center gap-2">
+          <i class="ph ph-chart-bar text-gh-light-accent dark:text-gh-dark-accent"></i>
+          Test Execution Velocity & Framework Commits
+        </h3>
+        <p class="text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted">1,420+ automated test executions and commits across web, mobile, and API layers</p>
+
+        <!-- Simulated Heatmap Grid -->
+        <div class="overflow-x-auto pb-2">
+          <div class="inline-grid grid-rows-7 grid-flow-col gap-1 p-2 bg-gh-light-subtle dark:bg-gh-dark-subtle rounded border border-gh-light-border dark:border-gh-dark-border" id="heatmapGrid"></div>
+        </div>
+
+        <div class="flex items-center justify-between text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted pt-2">
+          <span>Continuous STLC Integration across 4 enterprise domains</span>
+          <div class="flex items-center space-x-1 text-[11px]">
+            <span>Fewer tests</span>
+            <span class="w-2.5 h-2.5 rounded-sm bg-gh-light-muted dark:bg-gh-dark-muted"></span>
+            <span class="w-2.5 h-2.5 rounded-sm bg-emerald-900"></span>
+            <span class="w-2.5 h-2.5 rounded-sm bg-emerald-700"></span>
+            <span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span>
+            <span class="w-2.5 h-2.5 rounded-sm bg-emerald-300"></span>
+            <span>More tests</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domain Distribution -->
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs">
+        <div class="p-4 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-canvas dark:bg-gh-dark-canvas">
+          <div class="text-gh-light-textMuted dark:text-gh-dark-textMuted uppercase font-semibold">SaaS & Commercial</div>
+          <div class="text-xl font-bold mt-1 text-gh-light-accent dark:text-gh-dark-accent">Trimble Inc.</div>
+          <p class="mt-1 text-gh-light-textMuted dark:text-gh-dark-textMuted">Account Experience Platform</p>
+        </div>
+        <div class="p-4 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-canvas dark:bg-gh-dark-canvas">
+          <div class="text-gh-light-textMuted dark:text-gh-dark-textMuted uppercase font-semibold">Telecom & Fintech</div>
+          <div class="text-xl font-bold mt-1 text-emerald-500">Vodafone</div>
+          <p class="mt-1 text-gh-light-textMuted dark:text-gh-dark-textMuted">M-Pesa Mobile Payments</p>
+        </div>
+        <div class="p-4 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-canvas dark:bg-gh-dark-canvas">
+          <div class="text-gh-light-textMuted dark:text-gh-dark-textMuted uppercase font-semibold">Health Insurance</div>
+          <div class="text-xl font-bold mt-1 text-purple-500">HCSC / BlueCross</div>
+          <p class="mt-1 text-gh-light-textMuted dark:text-gh-dark-textMuted">MyBlueRX Mobile Testing</p>
+        </div>
+        <div class="p-4 rounded-md border border-gh-light-border dark:border-gh-dark-border bg-gh-light-canvas dark:bg-gh-dark-canvas">
+          <div class="text-gh-light-textMuted dark:text-gh-dark-textMuted uppercase font-semibold">Commercial Data</div>
+          <div class="text-xl font-bold mt-1 text-amber-500">Dun & Bradstreet</div>
+          <p class="mt-1 text-gh-light-textMuted dark:text-gh-dark-textMuted">BDD Smoke & Regression</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- GITHUB FOOTER -->
+  <footer class="mt-auto border-t border-gh-light-border dark:border-gh-dark-border py-6 text-xs text-gh-light-textMuted dark:text-gh-dark-textMuted no-print">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <svg height="20" viewBox="0 0 16 16" version="1.1" width="20" class="fill-current text-gh-light-textMuted dark:text-gh-dark-textMuted">
+          <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+        </svg>
+        <span>© 2026 N S Vishal Kumar. GitHub-style SDET Portfolio. Hosted on GitHub Pages.</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="mailto:nsvishalkumar@gmail.com" class="hover:text-gh-light-accent dark:hover:text-gh-dark-accent">Email</a>
+        <a href="tel:+918870488266" class="hover:text-gh-light-accent dark:hover:text-gh-dark-accent">+91-8870488266</a>
+        <a href="javascript:window.print()" class="hover:text-gh-light-accent dark:hover:text-gh-dark-accent font-semibold">Print to PDF</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- NOTIFICATION TOAST -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-gh-light-subtle dark:bg-gh-dark-muted border border-gh-light-border dark:border-gh-dark-border shadow-lg rounded-md px-4 py-2.5 text-xs flex items-center space-x-2 transform translate-y-20 opacity-0 transition-all duration-300">
+    <i class="ph ph-check-circle text-emerald-500 text-base"></i>
+    <span id="toastMsg" class="font-medium">Copied!</span>
+  </div>
+
+  <script>
+    // Tab switching
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-panel").forEach(p => p.classList.add("hidden"));
+      document.querySelectorAll(".tab-item").forEach(b => {
+        b.classList.remove("tab-active", "text-gh-light-text", "dark:text-gh-dark-text");
+        b.classList.add("text-gh-light-textMuted", "dark:text-gh-dark-textMuted");
+      });
+
+      const activePanel = document.getElementById(`tabContent-${tabId}`);
+      const activeBtn = document.getElementById(`tabBtn-${tabId}`);
+      if (activePanel && activeBtn) {
+        activePanel.classList.remove("hidden");
+        activeBtn.classList.add("tab-active", "text-gh-light-text", "dark:text-gh-dark-text");
+        activeBtn.classList.remove("text-gh-light-textMuted", "dark:text-gh-dark-textMuted");
+      }
+    }
+
+    // File Preview
+    function previewFile(filename) {
+      const viewer = document.getElementById("codeFileViewer");
+      const title = document.getElementById("codeFileName");
+      const content = document.getElementById("codeFileContent");
+      const lines = document.getElementById("codeFileLines");
+
+      if (filename === "README.md") {
+        closeFileViewer();
+        document.getElementById("readmeContainer").scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      viewer.classList.remove("hidden");
+      title.innerText = filename;
+
+      let code = "";
+      if (filename === "automation-frameworks.ts") {
+        code = `// Playwright & MCP Playwright Configuration - Trimble AXP
+import { test, expect } from '@playwright/test';
+
+export interface SDETFrameworkConfig {
+  leadSDET: 'N S Vishal Kumar';
+  coreEngines: ['Playwright', 'MCP Playwright', 'CodeceptJS', 'Appium'];
+  supportedLayers: ['Web UI', 'Mobile (iOS & Android)', 'REST API'];
+  cloudEnvironments: ['Perfecto', 'STF (Smartphone Test Farm - Ubuntu)'];
+  ciGating: 'Jenkins Post-Merge Automated Smoke Acceptance';
+}
+
+test('Validate Account Experience Platform (AXP) Subscription Entitlement Flow', async ({ page }) => {
+  await page.goto('https://axp.trimble.com/subscriptions');
+  await expect(page.locator('#entitlement-status')).toHaveText('Active Commercial Tier');
+  console.log('Automated smoke pass: 0 defect leakage.');
+});`;
+        lines.innerText = "18 lines • TypeScript";
+      } else if (filename === "experience.json") {
+        code = JSON.stringify([
+          { employer: "Trimble Inc.", role: "Lead SDET", period: "Apr 2025 - Present", project: "NGSS / AXP", stack: ["Playwright", "MCP Playwright", "Cursor AI", "API Testing"] },
+          { employer: "Prodapt Solutions", role: "Lead Engineer", period: "Apr 2023 - Apr 2025", client: "Vodafone M-Pesa", stack: ["CodeceptJS", "JavaScript", "STF Server", "Ubuntu"] },
+          { employer: "Hashedin by Deloitte", role: "SDET II", period: "Aug 2021 - Mar 2023", client: "HCSC / MyBlueRX", stack: ["Appium", "Java", "Perfecto", "Dynatrace"] },
+          { employer: "Cognizant", role: "Associate", period: "Dec 2017 - Aug 2021", clients: ["Dun & Bradstreet", "Zurich Insurance"], stack: ["Selenium", "JBehave", "Jenkins"] }
+        ], null, 2);
+        lines.innerText = "24 lines • JSON";
+      } else if (filename === "certifications.md") {
+        code = `# Verified Certifications\n\n1. Microsoft Certified: Azure Fundamentals (AZ-900) — Issued Feb 2021\n2. Tricentis Automation Specialist 1 (TOSCA Automation Tool)\n\nEducation:\n- B.E. Electronics & Communication Engineering (Anna University / Mepco Schlenk, 2017)`;
+        lines.innerText = "8 lines • Markdown";
+      } else if (filename === "contact.env") {
+        code = `NAME="N S Vishal Kumar"\nROLE="Lead SDET"\nCURRENT_EMPLOYER="Trimble Inc."\nEMAIL="nsvishalkumar@gmail.com"\nPHONE="+91-8870488266"\nLOCATION="Chennai, India"\nOPEN_TO_ROLES=true\nEXP_YEARS=8.5`;
+        lines.innerText = "8 lines • ENV";
+      }
+
+      content.textContent = code;
+      viewer.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function closeFileViewer() {
+      document.getElementById("codeFileViewer").classList.add("hidden");
+    }
+
+    // Theme Switcher
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeIcon = document.getElementById("themeIcon");
+      if (html.classList.contains("dark")) {
+        html.classList.remove("dark");
+        themeIcon.className = "ph ph-moon text-base";
+        localStorage.setItem("vk_theme", "light");
+      } else {
+        html.classList.add("dark");
+        themeIcon.className = "ph ph-sun text-base";
+        localStorage.setItem("vk_theme", "dark");
+      }
+    }
+
+    // Heatmap generator
+    function generateHeatmap() {
+      const grid = document.getElementById("heatmapGrid");
+      grid.innerHTML = "";
+      const levels = ["bg-gh-light-muted dark:bg-gh-dark-muted", "bg-emerald-900", "bg-emerald-700", "bg-emerald-500", "bg-emerald-300"];
+      for (let i = 0; i < 52 * 7; i++) {
+        const rand = Math.random();
+        let lvl = 0;
+        if (rand > 0.82) lvl = 4;
+        else if (rand > 0.65) lvl = 3;
+        else if (rand > 0.45) lvl = 2;
+        else if (rand > 0.20) lvl = 1;
+
+        const cell = document.createElement("div");
+        cell.className = `w-2.5 h-2.5 rounded-sm ${levels[lvl]} transition-transform hover:scale-125`;
+        cell.title = `${lvl * 4} automated test runs & commits`;
+        grid.appendChild(cell);
+      }
+    }
+
+    function copyCloneCommand() {
+      copyToClip("git clone https://github.com/nsvishalkumar/lead-sdet-portfolio.git");
+      showToast("Clone URL copied to clipboard!");
+    }
+
+    function copyReadmeText() {
+      copyToClip("N S Vishal Kumar — Lead SDET at Trimble Inc.\nEmail: nsvishalkumar@gmail.com | Phone: +91-8870488266\nSpecialized in Playwright, MCP Playwright, Appium, CodeceptJS.");
+      showToast("Profile details copied!");
+    }
+
+    function handleStar() {
+      const starLabel = document.getElementById("starLabel");
+      const count = document.getElementById("starCount");
+      starLabel.innerText = "Starred";
+      count.innerText = "149";
+      showToast("Thank you for starring Vishal's portfolio repo!");
+    }
+
+    function copyToClip(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      document.getElementById("toastMsg").innerText = msg;
+      toast.classList.remove("translate-y-20", "opacity-0");
+      setTimeout(() => toast.classList.add("translate-y-20", "opacity-0"), 3000);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("vk_theme") === "light") {
+        document.documentElement.classList.remove("dark");
+        document.getElementById("themeIcon").className = "ph ph-moon text-base";
+      }
+      generateHeatmap();
+    });
+  </script>
+</body>
+</html>
